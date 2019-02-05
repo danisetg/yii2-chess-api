@@ -9,11 +9,29 @@
 namespace app\controllers;
 
 
+use yii\filters\auth\HttpBearerAuth;
 use yii\web\Controller;
 
 class UserController extends Controller
 {
-    public function actionIndex() {
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => HttpBearerAuth::class,
+        ];
+        return $behaviors;
+    }
+
+    public function actionIndex()
+    {
         return "asd";
+    }
+
+    public function actionRegister()
+    {
     }
 }
